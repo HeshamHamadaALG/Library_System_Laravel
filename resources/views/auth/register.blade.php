@@ -89,7 +89,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <label for="type" class="col-md-4 control-label col-form-label text-md-right" >User Type:</label>
                                 <div class="col-md-6">
                                     <select class="form-control" name="type" id="type">
@@ -107,7 +107,7 @@
                                     <option value="0">False</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
