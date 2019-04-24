@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('books', function()
+{
+    return View::make('books');
+});
+
