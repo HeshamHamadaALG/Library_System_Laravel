@@ -23,7 +23,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::resource('users', 'UserController');
+
+// Not Finished yet
     Route::get('books', function () {
         return View::make('books');
     });
 });
+
+

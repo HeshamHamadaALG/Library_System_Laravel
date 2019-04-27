@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -63,6 +64,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        if (!Auth::check() || Auth::user()->type== 'user') {
+            $data['type']='user';
+            $data['active']='1';
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -71,6 +78,7 @@ class RegisterController extends Controller
             'NationalID' => $data['NationalID'],
             'type' => $data['type'],
             'is_active' => (($data['active']=='1')?1:0),
+            
         ]);
     }
 }
