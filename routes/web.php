@@ -27,6 +27,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('books', function () {
         return View::make('books');
     });
+    Route::get('bookid', function () {
+        return View::make('bookid');
+    });
 });
 
 
