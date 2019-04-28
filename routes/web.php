@@ -16,12 +16,14 @@
 Auth::routes();
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => ['auth','cors']], function () {
 
     Route::get('/', function () {
         return view('welcome');
     });
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('users', 'UserController');
+    Route::resource('admin', 'AdminController');
+    Route::get('/api/get-lease-chart-data', 'ChartDataController@getMonthlyLeaseData');
 });
 

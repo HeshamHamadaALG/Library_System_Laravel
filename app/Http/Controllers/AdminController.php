@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 
-class UserController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.index');
     }
 
     /**
@@ -46,8 +45,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('users.show', compact('user'));
+        //
     }
 
     /**
@@ -58,8 +56,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('users.edit', compact('user'));
+        //
     }
 
     /**
@@ -71,22 +68,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'=>'required|max:500',
-            'phone'=> 'required|digits_between:5,25|numeric',
-            'email' => 'required|regex:/^.+@.+$/i',
-            'NationalID'=>'required|digits_between:5,25|numeric',
-            ]);
-            
-            
-            $user = User::find($id);
-            // Rule::unique('phone')->ignore($contact);
-            $user->name  = $request->get('name');
-            $user->phone = $request->get('phone');
-            $user->email = $request->get('email');
-            $user->NationalID = $request->get('NationalID');
-            $user->save();
-            return redirect('/');
+        //
     }
 
     /**
