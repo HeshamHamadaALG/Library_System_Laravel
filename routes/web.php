@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
         return View::make('books');
     });
 });
+Route::resource('books', 'BookController');
 
 
 Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
@@ -36,5 +37,3 @@ Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
     Route::post('/admin/manager/update/{id}' , 'Admin\ManagerController@update')->name('updateManager');
     Route::post('/admin/manager/delete/{id}' , 'Admin\ManagerController@destroy')->name('deleteManager');
 });
-
-
