@@ -20,8 +20,10 @@ Route::group(['middleware' => 'auth'], function () {
         return view('welcome');
     });
     Route::get('/home', 'HomeController@index')->name('home');
+
     Route::resource('users', 'UserController');
-    // Not Finished yet
+
+// Not Finished yet
     Route::get('books', function () {
         return View::make('books');
     });

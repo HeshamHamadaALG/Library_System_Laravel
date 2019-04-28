@@ -15,6 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -49,11 +50,14 @@
                                 </li>
                             @endif
                         @else
+<<<<<<< HEAD
+=======
                         <li class="nav-item">
                                 <a id="profileItem" class="nav-link" href="{{ route('users.show',Auth::id()) }}">
                                     Profile
                                 </a>
                         </li>
+>>>>>>> 704eca1865e6335fa67baba9b09c04c0320783b7
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
