@@ -33,9 +33,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('books', function () {
         return View::make('books');
     });
+    Route::get('bookid', function () {
+        return View::make('bookid');
+    });
 });
+Route::resource('books', 'BookController');
 
 
+<<<<<<< HEAD
 // Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
 //     Route::get('/admin/manager' , 'Admin\ManagerController@index')->name('manager');
 //     Route::post('/admin/manager/save' , 'Admin\ManagerController@save')->name('saveManager');
@@ -44,3 +49,11 @@ Route::group(['middleware' => 'auth'], function () {
 // });
 
 
+=======
+Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
+    Route::get('/admin/manager' , 'Admin\ManagerController@index')->name('manager');
+    Route::post('/admin/manager/save' , 'Admin\ManagerController@save')->name('saveManager');
+    Route::post('/admin/manager/update/{id}' , 'Admin\ManagerController@update')->name('updateManager');
+    Route::post('/admin/manager/delete/{id}' , 'Admin\ManagerController@destroy')->name('deleteManager');
+});
+>>>>>>> 044b880c2ac3928c544ebd17284c8c2e47ace303
