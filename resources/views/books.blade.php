@@ -10,8 +10,7 @@
             <form action="/search" method="POST" role="search">
                 {{ csrf_field() }}
                 <div class="input-group">
-                    <input type="text" class="form-control" name="q"
-                        placeholder="Search Books"> <span class="input-group-btn">
+                    <input type="text" class="form-control" name="q" placeholder="Search Books"> <span class="input-group-btn">
                         <button type="submit" class="btn btn-default">
                             <span class="glyphicon glyphicon-search">Search </span>
                         </button>
@@ -61,13 +60,22 @@
                 <!-- Title -->
                 <div class="card-header d-inline-flex">
                     <h4 class="font-weight-bold">{{$book->title}}</h4>
+                    @foreach ($fav as $favourite)
+                    @if ($favourite->user_id == Auth::user()->id && $favourite->book_id == $book->id)
+                    <span style="margin-left: auto;"><i class="fa fa-heart fav collr"></i></span>
+                    @else
+                    <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
                     <span style="margin-left: auto;"><i class="fa fa-heart fav"></i></span>
+                    </a>
+                    @endif
+                    @endforeach
+
                 </div>
                 <!-- Card image -->
                 <div class="view view-cascade overlay">
                     <!-- link to book by click image -->
                     <a href="{{ route('bookid', $book->id) }}">
-                    <img class="imgg card-img-top" src="{{$book->image}}" alt="Card image cap" height="300" width="150">
+                        <img class="imgg card-img-top" src="{{$book->image}}" alt="Card image cap" height="300" width="150">
                     </a>
                     <a>
                         <div class="mask rgba-white-slight"></div>
@@ -87,17 +95,17 @@
                         <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
                         <li class="list-inline-item">
                             @foreach ($rates as $rate)
-                                @if ($rate->book_id == $book->id)
-                                    <p class="text-muted">{{$rate->rate}}</p>
-                                @endif
+                            @if ($rate->book_id == $book->id)
+                            <p class="text-muted">{{$rate->rate}}</p>
+                            @endif
                             @endforeach
                         </li>
                     </ul>
                     <!-- Category -->
                     @foreach ($Cates as $cate2)
-                        @if ($cate2->id == $book->cat_id)
-                            <p class="aval"> <span> Cat : </span> {{$cate2->name}} </p>
-                        @endif
+                    @if ($cate2->id == $book->cat_id)
+                    <p class="aval"> <span> Cat : </span> {{$cate2->name}} </p>
+                    @endif
                     @endforeach
                     <!-- Text -->
                     <p class="card-text">{{$book->description}}</p>
