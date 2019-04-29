@@ -32,25 +32,28 @@
 
             <li class="list-group-item">
                 <a href="#collapseA" data-toggle="collapse">
-                    <span>Categories</span>
+                    <a href="{{ url('/books')}}"> <span>Categories</span> </a>
                 </a>
             </li>
             <ul class="list-group" id="collapseA">
                 @foreach($Cates as $cats)
-            <a href="" ><li class="list-group-item lhover"></i> {{$cats->name}} </li> </a>
+                <!-- display books by category -->
+                <a href="{{ route('category', $cats->id) }}">
+                    <li class="list-group-item lhover"></i> {{$cats->name}} </li>
+                </a>
                 @endforeach
             </ul>
         </div>
         <!-- end of Categories side bar  -->
 
         <!-- book Card -->
-    @foreach ($books as $book)
+        @foreach ($books as $book)
         <div class="col-lg-3 col-md-6 mb-3">
             <!-- Card Narrower -->
             <div class="card card-cascade narrower">
                 <!-- Title -->
                 <div class="card-header d-inline-flex">
-                <h4 class="font-weight-bold">{{$book->title}}</h4>
+                    <h4 class="font-weight-bold">{{$book->title}}</h4>
                     <span style="margin-left: auto;"><i class="fa fa-heart fav"></i></span>
                 </div>
                 <!-- Card image -->
@@ -63,6 +66,8 @@
 
                 <!-- Card content -->
                 <div class="card-body card-body-cascade">
+                    <!-- Author -->
+                    <p class="card-text">By : {{$book->author}}</p>
                     <!-- Data -->
                     <ul class="list-unstyled list-inline rating mb-0">
                         <li class="list-inline-item"><i class="fa fa-star rateStr"> </i></li>
@@ -72,14 +77,20 @@
                         <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
                         <li class="list-inline-item">
                             @foreach ($rates as $rate)
-                                @if ($rate->book_id == $book->id)
-                        <p class="text-muted">{{$rate->rate}}</p>
-                                @endif
+                            @if ($rate->book_id == $book->id)
+                            <p class="text-muted">{{$rate->rate}}</p>
+                            @endif
                             @endforeach
                         </li>
                     </ul>
+                    <!-- Category -->
+                    @foreach ($Cates as $cate2)
+                    @if ($cate2->id == $book->cat_id)
+                    <p class="aval"> <span> Cat : </span> {{$cate2->name}} </p>
+                    @endif
+                    @endforeach
                     <!-- Text -->
-                <p class="card-text">{{$book->description}}</p>
+                    <p class="card-text">{{$book->description}}</p>
                     <!-- Avilability -->
                     <p class="aval"> <span> {{$book->numberOfCopies}} </span> Books Available </p>
                     <!-- Button -->
@@ -88,7 +99,7 @@
             </div>
             <!-- Card Narrower -->
         </div>
-    @endforeach
+        @endforeach
     </div>
 
     <!-- start pagination -->
