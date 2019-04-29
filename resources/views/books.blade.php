@@ -7,9 +7,16 @@
 
     <div class="container">
         <div class="row">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <form action="/search" method="POST" role="search">
+                {{ csrf_field() }}
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q"
+                        placeholder="Search Books"> <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search">Search </span>
+                        </button>
+                    </span>
+                </div>
             </form>
 
             <div class="d-inline-flex orderPos">

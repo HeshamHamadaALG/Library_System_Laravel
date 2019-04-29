@@ -23,7 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $allCats = Category::findAll();
-        // return view('books', ['cats' => $allCats]);
+        return view('home');
     }
 }

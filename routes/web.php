@@ -1,5 +1,7 @@
 <?php
 
+use App\Book;
+use Illuminate\Support\Facades\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +41,14 @@ Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
     Route::post('/admin/manager/save' , 'Admin\ManagerController@save')->name('saveManager');
     Route::post('/admin/manager/update/{id}' , 'Admin\ManagerController@update')->name('updateManager');
     Route::post('/admin/manager/delete/{id}' , 'Admin\ManagerController@destroy')->name('deleteManager');
+});
+
+//search
+Route::any('/search',function(){
+    $q = Input::get ( 'q' );
+    $books = Book::where('title','LIKE','%'.$q.'%')->get();
+    if(count($books) > 0)
+        return view('search')->withDetails($books)->withQuery ( $q );
+    else
+        return view ('search')->withMessage('No Details found. Try to search again !');
 });
