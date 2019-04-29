@@ -58,7 +58,10 @@
                 </div>
                 <!-- Card image -->
                 <div class="view view-cascade overlay">
+                    <!-- link to book by click image -->
+                    <a href="{{ route('bookid', $book->id) }}">
                     <img class="imgg card-img-top" src="{{$book->image}}" alt="Card image cap" height="300" width="150">
+                    </a>
                     <a>
                         <div class="mask rgba-white-slight"></div>
                     </a>

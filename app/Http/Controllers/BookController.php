@@ -27,5 +27,7 @@ class BookController extends Controller
         $rates = BookRating::all();
         return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates]);
     }
+    
+
 }
 

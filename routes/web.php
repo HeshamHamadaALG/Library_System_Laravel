@@ -34,9 +34,11 @@ Route::group(['middleware' => 'auth'], function () {
         return View::make('books');
     });
     Route::get('books/{category}', 'BookController@category')->name('category');
-    Route::get('bookid', function () {
-        return View::make('bookid');
-    });
+    // Route::get('bookid', function () {
+    //     return View::make('bookid');
+    // });
+    Route::get('bookid/{bookid}', 'BookIdController@bookid')->name('bookid');
+
 });
 Route::resource('books', 'BookController');
 
