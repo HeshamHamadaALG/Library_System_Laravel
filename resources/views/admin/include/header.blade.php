@@ -1,6 +1,7 @@
 <div class="wrapper">
     <header class="main-header">
-        <a href="{{ route('dashboard') }}" class="logo">
+    <!-- { { route('dashboard') }} -->
+        <a href="#" class="logo">
             <span class="logo-lg"><b>Library</b>Cpanel</span>
         </a>
         <nav class="navbar navbar-static-top" role="navigation">

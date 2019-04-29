@@ -72,9 +72,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required',
-            'phone'=> 'required|numeric|unique:users,phone,'.$id,
-            
+            'name'=>'required|max:500',
+            'phone'=> 'required|digits_between:5,25|numeric',
+            'email' => 'required|regex:/^.+@.+$/i',
+            'NationalID'=>'required|digits_between:5,25|numeric',
             ]);
             
             

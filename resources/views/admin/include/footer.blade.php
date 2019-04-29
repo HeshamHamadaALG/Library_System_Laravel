@@ -7,8 +7,8 @@
 
 <div class="control-sidebar-bg"></div>
 </div>
-<script src="{{ asset('admin/bower_components/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{ asset('admin/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('admin/dist/js/adminlte.min.js')}}"></script>
-<script src="{{ asset('admin/bower_components/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ asset('admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+<script src="{{ asset('adminAssets/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{ asset('adminAssets/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('adminAssets/dist/js/adminlte.min.js')}}"></script>
+<script src="{{ asset('adminAssets/bower_components/ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('adminAssets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>

@@ -17,4 +17,17 @@ class BookController extends Controller
         $rates = BookRating::all();
         return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates]);
     }
+
+    // Dispaly By Category
+
+    public function category($catId)
+    {
+        $allBooks = Book::where('cat_id', $catId)->paginate(3);
+        $Categories = Category::all()->where('id', $catId);
+        $rates = BookRating::all();
+        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates]);
+    }
+    
+
 }
+
