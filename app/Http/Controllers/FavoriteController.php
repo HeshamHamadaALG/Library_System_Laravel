@@ -28,5 +28,17 @@ class FavoriteController extends Controller
         $fav->save();
         return redirect('/books');
     }
+
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Favourite::destroy($id);
+        return redirect('/books'); 
+    }
 }
 
