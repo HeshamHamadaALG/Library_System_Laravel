@@ -87,17 +87,17 @@
                         <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
                         <li class="list-inline-item">
                             @foreach ($rates as $rate)
-                            @if ($rate->book_id == $book->id)
-                            <p class="text-muted">{{$rate->rate}}</p>
-                            @endif
+                                @if ($rate->book_id == $book->id)
+                                    <p class="text-muted">{{$rate->rate}}</p>
+                                @endif
                             @endforeach
                         </li>
                     </ul>
                     <!-- Category -->
                     @foreach ($Cates as $cate2)
-                    @if ($cate2->id == $book->cat_id)
-                    <p class="aval"> <span> Cat : </span> {{$cate2->name}} </p>
-                    @endif
+                        @if ($cate2->id == $book->cat_id)
+                            <p class="aval"> <span> Cat : </span> {{$cate2->name}} </p>
+                        @endif
                     @endforeach
                     <!-- Text -->
                     <p class="card-text">{{$book->description}}</p>
