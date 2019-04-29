@@ -17,11 +17,12 @@ class BookIdController extends Controller
     public function bookid($bkId)
     {
         $Book = Book::all()->where('id', $bkId);
-        $Categories = Category::all()->where('id', $bkId);
+        $related = Book::all();
+        $Categories = Category::all();
         $rates = BookRating::all();
         $comments = Comment::all();
         $commRate = CommentRating::all();
-        return view('bookid', ['books' => $Book,'Cates' => $Categories, 'rates' => $rates, 'comment' => $comments, 'comRate' => $commRate]);
+        return view('bookid', ['books' => $Book,'Cates' => $Categories, 'rates' => $rates,'related' => $related, 'comment' => $comments, 'comRate' => $commRate]);
     }
 
 }
