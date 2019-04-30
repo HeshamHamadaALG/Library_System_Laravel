@@ -7,9 +7,15 @@
 
     <div class="container">
         <div class="row">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <form action="/search" method="POST" role="search">
+                {{ csrf_field() }}
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" placeholder="Search Books"> <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                            <span class="glyphicon glyphicon-search">Search </span>
+                        </button>
+                    </span>
+                </div>
             </form>
 
             <div class="d-inline-flex orderPos">
@@ -54,13 +60,24 @@
                 <!-- Title -->
                 <div class="card-header d-inline-flex">
                     <h4 class="font-weight-bold">{{$book->title}}</h4>
+                    @foreach ($fav as $favourite)
+                    @if ($favourite->user_id == Auth::user()->id && $favourite->book_id == $book->id)
+                    <a href="{{ route('deletefav', $favourite->id) }}">
+                    <span style="margin-left: auto;"><i class="fa fa-heart fav collr"></i></span>
+                    </a>
+                    @else
+                    <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
                     <span style="margin-left: auto;"><i class="fa fa-heart fav"></i></span>
+                    </a>
+                    @endif
+                    @endforeach
+
                 </div>
                 <!-- Card image -->
                 <div class="view view-cascade overlay">
                     <!-- link to book by click image -->
                     <a href="{{ route('bookid', $book->id) }}">
-                    <img class="imgg card-img-top" src="{{$book->image}}" alt="Card image cap" height="300" width="150">
+                        <img class="imgg card-img-top" src="{{$book->image}}" alt="Card image cap" height="300" width="150">
                     </a>
                     <a>
                         <div class="mask rgba-white-slight"></div>

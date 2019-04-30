@@ -9,6 +9,7 @@ use App\BookRating;
 use App\Comment;
 use App\CommentRating;
 use Illuminate\Support\Facades\Auth;
+use App\Favourite;
 
 class BookController extends Controller
 {
@@ -18,7 +19,8 @@ class BookController extends Controller
         $allBooks = Book::paginate(3);
         $Categories = Category::all();
         $rates = BookRating::all();
-        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates]);
+        $favourite = Favourite::all();
+        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
     }
 
     // Dispaly By Category
@@ -28,7 +30,8 @@ class BookController extends Controller
         $allBooks = Book::where('cat_id', $catId)->paginate(3);
         $Categories = Category::all()->where('id', $catId);
         $rates = BookRating::all();
-        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates]);
+        $favourite = Favourite::all();
+        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
     }
 
     public function show($bookId)
@@ -66,6 +69,7 @@ class BookController extends Controller
     }
 
 
+    
     
 
 }

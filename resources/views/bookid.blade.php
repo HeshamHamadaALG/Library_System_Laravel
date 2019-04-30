@@ -16,6 +16,8 @@
                 <div class="book-info">
                     <span style="float: right; font-size: 180%"><i class="fa fa-heart fav"></i></span>
                     <h3 class="font-weight-bold">{{$book->title}}</h3>
+                    <!-- Author -->
+                    <p class="card-text">By : {{$book->author}}</p>
                     <!-- Data -->
                     <ul class="list-unstyled list-inline rating mb-0">
                         <li class="list-inline-item"><i class="fa fa-star rateStr"> </i></li>
@@ -24,15 +26,19 @@
                         <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
                         <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
                         <li class="list-inline-item">
-                            <p class="text-muted">4.5 (413)</p>
+                            @foreach ($rates as $rate)
+                            @if ($rate->book_id == $book->id)
+                            <p class="text-muted">{{$rate->rate}}</p>
+                            @endif
+                            @endforeach
                         </li>
                     </ul>
                     <!-- Card content -->
                     <div class="card-body card-body-cascade">
                         <!-- Text -->
-                        <p class="card-text">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi.</p>
+                        <p class="card-text">{{$book->description}}</p>
                         <!-- Avilability -->
-                        <p class="aval"> <span> 2 </span> Books Available </p>
+                        <p class="aval"> <span> {{$book->numberOfCopies}} </span> Books Available </p>
                         <!-- Button -->
                         <a class="btnLease col-md-3">Lease</a>
 
@@ -97,11 +103,11 @@
                                 <div class="card card-cascade narrower">
                                     <!-- Title -->
                                     <div class="card-header d-inline-flex">
-                                        <h4 class="font-weight-bold">Life Of Pi</h4>
+                                        <h4 class="font-weight-bold">{{$book->title}}</h4>
                                     </div>
                                     <!-- Card image -->
                                     <div class="view view-cascade overlay">
-                                        <img class="imgg card-img-top" src="https://images.gr-assets.com/books/1320562005l/4214.jpg" alt="Card image cap">
+                                        <img class="imgg card-img-top" src="{{$book->image}}" alt="Card image cap">
                                         <a>
                                             <div class="mask rgba-white-slight"></div>
                                         </a>
@@ -111,19 +117,21 @@
                             </div>
                         </div>
                     </div>
-
-
+                    @foreach ($related as $relate)
+                    @if ($relate->cat_id == $book->cat_id)
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-md-3 col-sm-6 margg">
                                 <div class="card card-cascade narrower">
                                     <!-- Title -->
                                     <div class="card-header d-inline-flex">
-                                        <h4 class="font-weight-bold">Life Of Pi</h4>
+                                        <h4 class="font-weight-bold">{{$relate->title}}</h4>
                                     </div>
                                     <!-- Card image -->
                                     <div class="view view-cascade overlay">
-                                        <img class="imgg card-img-top" src="https://images.gr-assets.com/books/1320562005l/4214.jpg" alt="Card image cap">
+                                        <a href="{{ route('bookid', $relate->id) }}">
+                                        <img class="imgg card-img-top" src="{{$relate->image}}" alt="Card image cap">
+                                        </a>
                                         <a>
                                             <div class="mask rgba-white-slight"></div>
                                         </a>
@@ -136,6 +144,8 @@
 
                         </div>
                     </div>
+                        @endif
+                    @endforeach
 
                 </div>
                 <a class="carousel-control-prev" href="#ThumbnailCarousel" role="button" data-slide="prev">
