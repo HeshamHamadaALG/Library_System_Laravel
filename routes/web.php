@@ -30,13 +30,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/api/get-lease-chart-data', 'ChartDataController@getMonthlyLeaseData');
 
 // Not Finished yet
-    Route::get('books', function () {
-        return View::make('books');
-    });
-    Route::get('books/{category}', 'BookController@category')->name('category');
+    Route::resource('books', 'BookController');
+    
+    Route::get('books/cat/{category}', 'BookController@category')->name('category');
     // Route::get('bookid', function () {
     //     return View::make('bookid');
     // });
+    Route::post('books/{bookid}', 'BookController@addComment')->name('addComment');
     Route::get('bookid/{bookid}', 'BookIdController@bookid')->name('bookid');
 
 });
