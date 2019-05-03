@@ -26,7 +26,7 @@ class FavoriteController extends Controller
         $fav->book_id = $request->get('bkId');
         $fav->user_id = $request->get('uId');
         $fav->save();
-        return redirect('/books');
+        return redirect()->back();
     }
 
         /**
@@ -38,7 +38,7 @@ class FavoriteController extends Controller
     public function destroy($id)
     {
         Favourite::destroy($id);
-        return redirect('/books'); 
+        return redirect()->back(); 
     }
 }
 

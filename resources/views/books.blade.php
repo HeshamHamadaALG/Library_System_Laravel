@@ -60,17 +60,21 @@
                 <!-- Title -->
                 <div class="card-header d-inline-flex">
                     <h4 class="font-weight-bold">{{$book->title}}</h4>
-                    @foreach ($fav as $favourite)
-                    @if ($favourite->user_id == Auth::user()->id && $favourite->book_id == $book->id)
-                    <a href="{{ route('deletefav', $favourite->id) }}">
-                    <span style="margin-left: auto;"><i class="fa fa-heart fav collr"></i></span>
-                    </a>
-                    @else
-                    <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
-                    <span style="margin-left: auto;"><i class="fa fa-heart fav"></i></span>
-                    </a>
-                    @endif
-                    @endforeach
+                    <span style="margin-left: auto;">
+                    @forelse ($fav as $favourite)
+                        @if ($favourite->user_id == Auth::user()->id && $favourite->book_id == $book->id)
+                        <a href="{{ route('deletefav', $favourite->id) }}">
+                            <i class="fa fa-heart fav collr"></i>
+                        </a>
+                        @endif
+                        @empty
+                        <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
+                            <i class="fa fa-heart fav"></i>
+                        </a>
+                    @endforelse
+                    </span>
+
+
 
                 </div>
                 <!-- Card image -->

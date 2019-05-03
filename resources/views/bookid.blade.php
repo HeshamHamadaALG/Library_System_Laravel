@@ -12,7 +12,20 @@
             @foreach ($books as $book)
             <div class="bookCard d-inline-flex"><img class="image cover" src="{{$book->image}}" />
                 <div class="book-info">
-                    <span style="float: right; font-size: 180%"><i class="fa fa-heart fav"></i></span>
+                    <!-- start favorite -->
+                    @foreach ($fav as $favourite)
+                    @if ($favourite->user_id == Auth::user()->id && $favourite->book_id == $book->id)
+                    <a href="{{ route('deletefav', $favourite->id) }}">
+                    <span style="float: right; font-size: 180%;"><i class="fa fa-heart fav collr"></i></span>
+                    </a>
+                    @else
+                    <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
+                    <span style="float: right; font-size: 180%;"><i class="fa fa-heart fav"></i></span>
+                    </a>
+                    @endif
+                    @endforeach
+
+                    <!-- end favorite -->
                     <h3 class="font-weight-bold">{{$book->title}}</h3>
                     <!-- Author -->
                     <p class="card-text">By : {{$book->author}}</p>
