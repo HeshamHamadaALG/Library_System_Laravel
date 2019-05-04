@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link href="{{ asset('css/stars.css') }}" rel="stylesheet">
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -13,9 +15,8 @@
             <div class="bookCard d-inline-flex"><img class="image cover" src="{{$book->image}}" />
                 <div class="book-info">
                     <!-- start favorite -->
-                    @foreach ($fav as $favourite)
-                    @if ($favourite->user_id == Auth::user()->id && $favourite->book_id == $book->id)
-                    <a href="{{ route('deletefav', $favourite->id) }}">
+                    @if($book->favourites->where('user_id',Auth::user()->id)->count() > 0)
+                    <a href="{{ route('deletefav', $book->id) }}">
                     <span style="float: right; font-size: 180%;"><i class="fa fa-heart fav collr"></i></span>
                     </a>
                     @else
@@ -23,7 +24,6 @@
                     <span style="float: right; font-size: 180%;"><i class="fa fa-heart fav"></i></span>
                     </a>
                     @endif
-                    @endforeach
 
                     <!-- end favorite -->
                     <h3 class="font-weight-bold">{{$book->title}}</h3>
@@ -62,37 +62,43 @@
 
             <!-- add comment -->
 
-            <div class="form-group shadow-textarea d-flex">
-                <textarea class="form-control z-depth-1 col-md-9" rows="2" placeholder="Write comment here..."></textarea>
-                <button class="btn btn-info col-md-3 "> Add Comment ..</button>
-            </div>
+            <form method="post" action="{{route('addComment',$book->id)}}">
+                    @csrf
+                <div class="form-group shadow-textarea d-flex">
+                    <textarea class="form-control z-depth-1 col-md-9" rows="2" name="text" placeholder="Write comment here..."></textarea>
+                    <input type="hidden" value="{{$book->id}}" name="bookID"/>
+                    <button type="submit" class="btn btn-info col-md-3 "> Add Comment ..</button>
+                </div>
+            </form>
 
             <!-- end of add comment -->
 
             <hr>
 
             <!-- show comments -->
-
-            <div class="col-sm-12" style="margin: 2%;">
-                <div class="card card-cascade">
-                    <div class="card-header">
-                        <strong>UserName</strong> <span class="text-muted">12/04/2019 01:25 AM</span>
-                    </div>
-                    <div class="card-body card-body-cascade">
-                        Panel content
+            <div class="row">
+            @foreach ($comments as $comment)
+                <div class="col-sm-12" style="margin: 2%;">
+                    <div class="row">
+                        <div class="card card-cascade col-sm-9">
+                            <div class="card-header">
+                                <strong>{{$comment->user->name}}</strong> <span class="text-muted">{{$comment->created_at}}</span>
+                            </div>
+                            <div class="card-body card-body-cascade">
+                            {{$comment->text}}
+                            </div>
+                        </div>
+                        <div class="star-rating star{{$loop->index}} col-sm-3" id="1">
+                            <span class="fa fa-star-o" data-rating="1"></span>
+                            <span class="fa fa-star-o" data-rating="2"></span>
+                            <span class="fa fa-star-o" data-rating="3"></span>
+                            <span class="fa fa-star-o" data-rating="4"></span>
+                            <span class="fa fa-star-o" data-rating="5"></span>
+                            <input type="hidden" name="whatever1" class="rating-value" value="4">
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="col-sm-12">
-                <div class="card card-cascade" style="margin: 2%;">
-                    <div class="card-header">
-                        <strong>UserName</strong> <span class="text-muted">12/04/2019 01:25 AM</span>
-                    </div>
-                    <div class="card-body card-body-cascade">
-                        Panel content
-                    </div>
-                </div>
+            @endforeach
             </div>
             <!-- End  show comments -->
 
@@ -134,7 +140,7 @@
                                     </div>
                                     <!-- Card image -->
                                     <div class="view view-cascade overlay">
-                                        <a href="{{ route('bookid', $relate->id) }}">
+                                        <a href="{{ route('books.show', $relate->id) }}">
                                         <img class="imgg card-img-top" src="{{$relate->image}}" alt="Card image cap">
                                         </a>
                                         <a>
@@ -168,4 +174,8 @@
         </div>
         @endforeach
     </div>
+    @endsection
+
+    @section( 'scripts' )
+    <script src="{{asset('js/stars.js')}}"></script>
     @endsection

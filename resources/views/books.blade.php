@@ -60,27 +60,23 @@
                 <!-- Title -->
                 <div class="card-header d-inline-flex">
                     <h4 class="font-weight-bold">{{$book->title}}</h4>
-                    <span style="margin-left: auto;">
-                    @forelse ($fav as $favourite)
-                        @if ($favourite->user_id == Auth::user()->id && $favourite->book_id == $book->id)
-                        <a href="{{ route('deletefav', $favourite->id) }}">
-                            <i class="fa fa-heart fav collr"></i>
-                        </a>
-                        @endif
-                        @empty
-                        <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
-                            <i class="fa fa-heart fav"></i>
-                        </a>
-                    @endforelse
-                    </span>
 
+                    @if($book->favourites->where('user_id',Auth::user()->id)->count() > 0)
+                    <a href="{{ route('deletefav', $book->id) }}">
+                    <span style="margin-left: auto;"><i class="fa fa-heart fav collr"></i></span>
+                    </a>
+                    @else
+                    <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
+                    <span style="margin-left: auto;"><i class="fa fa-heart fav"></i></span>
+                    </a>
+                    @endif
 
 
                 </div>
                 <!-- Card image -->
                 <div class="view view-cascade overlay">
                     <!-- link to book by click image -->
-                    <a href="{{ route('bookid', $book->id) }}">
+                    <a href="{{ route('books.show', $book->id) }}">
                         <img class="imgg card-img-top" src="{{$book->image}}" alt="Card image cap" height="300" width="150">
                     </a>
                     <a>
