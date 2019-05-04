@@ -34,6 +34,27 @@ class BookController extends Controller
         return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
     }
 
+    // Dispaly By favourite
+
+    // public function favourite()
+    // {
+    //     $allBooks = Book::paginate(3);
+    //     $Categories = Category::all();
+    //     $rates = BookRating::all();
+    //     $favourite = Favourite::all();
+    //     return view('booksfav', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
+    // }
+
+    // Display by latest
+    public function latest()
+    {
+        $allBooks = Book::latest()->paginate(3);
+        $Categories = Category::all();
+        $rates = BookRating::all();
+        $favourite = Favourite::all();
+        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
+    }
+
     public function show($bookId)
     {
 

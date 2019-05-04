@@ -42,6 +42,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/books') }}">{{ __('Books') }}</a>
                         </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="">{{ __('Favourite') }}</a>
+                        </li> -->
                         @endguest
                     </ul>
 

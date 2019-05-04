@@ -51,6 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('bookid/{bookid}', 'BookIdController@bookid')->name('bookid');
     // Route::resource('books', 'BookController');
     
+    // Route::get('myfav', 'BookController@favourite')->name('favourite');
+    Route::get('/latest', 'BookController@latest')->name('latest');
     Route::get('/fav/{id}', 'FavoriteController@store')->name('store');
     Route::get('/del/{id}', 'FavoriteController@destroy')->name('deletefav');
 });

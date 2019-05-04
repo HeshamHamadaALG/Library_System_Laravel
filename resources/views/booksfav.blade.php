@@ -20,9 +20,9 @@
 
             <div class="d-inline-flex orderPos">
                 <h3 style="padding-right: 10px;"> Order By </h3>
-                <div class="btn-group pull-right">
+                <div class="btn-group pull-right" data-toggle="buttons-radio">
                     <button class="btn btn-outline-primary">Rate</button>
-                   <a href="{{ route('latest') }}"><button class="btn btn-outline-info">Latest</button></a>
+                    <button class="btn btn-outline-info">Latest</button>
                 </div>
             </div>
         </div>
@@ -54,6 +54,7 @@
 
         <!-- book Card -->
         @foreach ($books as $book)
+            @if($book->favourites->where('user_id',Auth::user()->id)->count() > 0)
         <div class="col-lg-3 col-md-6 mb-3">
             <!-- Card Narrower -->
             <div class="card card-cascade narrower">
@@ -119,6 +120,7 @@
             </div>
             <!-- Card Narrower -->
         </div>
+            @endif
         @endforeach
     </div>
 
