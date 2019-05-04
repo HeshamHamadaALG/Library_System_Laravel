@@ -20,7 +20,7 @@ class BookController extends Controller
         $Categories = Category::all();
         $rates = BookRating::all();
         $favourite = Favourite::all();
-        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
+        return view('books', ['books' => $allBooks, 'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
     }
 
     // Dispaly By Category
@@ -31,19 +31,30 @@ class BookController extends Controller
         $Categories = Category::all()->where('id', $catId);
         $rates = BookRating::all();
         $favourite = Favourite::all();
-        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
+        return view('books', ['books' => $allBooks, 'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
     }
 
     // Dispaly By favourite
 
-    // public function favourite()
-    // {
-    //     $allBooks = Book::paginate(3);
-    //     $Categories = Category::all();
-    //     $rates = BookRating::all();
-    //     $favourite = Favourite::all();
-    //     return view('booksfav', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
-    // }
+    public function favourite()
+    {
+        $allBooks = Book::paginate(3);
+        $Categories = Category::all();
+        $rates = BookRating::all();
+        $favourite = Favourite::all();
+        return view('booksfav', ['books' => $allBooks, 'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
+    }
+
+    // Dispaly By Category in Favourite
+
+    public function favcategory($category)
+    {
+        $allBooks = Book::where('cat_id', $category)->paginate(3);
+        $Categories = Category::all()->where('id', $category);
+        $rates = BookRating::all();
+        $favourite = Favourite::all();
+        return view('booksfav', ['books' => $allBooks, 'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
+    }
 
     // Display by latest
     public function latest()
@@ -52,7 +63,7 @@ class BookController extends Controller
         $Categories = Category::all();
         $rates = BookRating::all();
         $favourite = Favourite::all();
-        return view('books', ['books' => $allBooks,'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
+        return view('books', ['books' => $allBooks, 'Cates' => $Categories, 'rates' => $rates, 'fav' => $favourite]);
     }
 
     public function show($bookId)
@@ -68,11 +79,11 @@ class BookController extends Controller
             'book_id' => $bookId,
             'user_id' => Auth::user()->id,
         ]);
-        return view('bookid', ['books' => $Book,'Cates' => $Categories, 'rates' => $rates,'related' => $related, 'comments' => $comments, 'comRate' => $commRate, 'fav' => $favourite]);
+        return view('bookid', ['books' => $Book, 'Cates' => $Categories, 'rates' => $rates, 'related' => $related, 'comments' => $comments, 'comRate' => $commRate, 'fav' => $favourite]);
     }
 
 
-      /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -81,22 +92,16 @@ class BookController extends Controller
     public function addComment(Request $request)
     {
         $request->validate([
-            'text'=>'required',
-          ]);
-    
-          $comment = new Comment([
+            'text' => 'required',
+        ]);
+
+        $comment = new Comment([
             'text' => $request->get('text'),
-            'user_id'=> Auth::id(),
-            'book_id'=> $request->get('bookID'),
-          ]);
+            'user_id' => Auth::id(),
+            'book_id' => $request->get('bookID'),
+        ]);
 
-          $comment->save();
-          return redirect('/books/'.$request->get('bookID'));
+        $comment->save();
+        return redirect('/books/' . $request->get('bookID'));
     }
-
-
-    
-    
-
 }
-

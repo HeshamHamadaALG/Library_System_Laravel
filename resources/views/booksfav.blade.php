@@ -17,14 +17,6 @@
                     </span>
                 </div>
             </form>
-
-            <div class="d-inline-flex orderPos">
-                <h3 style="padding-right: 10px;"> Order By </h3>
-                <div class="btn-group pull-right" data-toggle="buttons-radio">
-                    <button class="btn btn-outline-primary">Rate</button>
-                    <button class="btn btn-outline-info">Latest</button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -38,13 +30,13 @@
 
             <li class="list-group-item">
                 <a href="#collapseA" data-toggle="collapse">
-                    <a href="{{ url('/books')}}"> <span>Categories</span> </a>
+                    <a href="{{ route('favourite') }}"> <span>Categories</span> </a>
                 </a>
             </li>
             <ul class="list-group" id="collapseA">
                 @foreach($Cates as $cats)
                 <!-- display books by category -->
-                <a href="{{ route('category', $cats->id) }}">
+                <a href="{{ route('favcategory', $cats->id) }}">
                     <li class="list-group-item lhover"></i> {{$cats->name}} </li>
                 </a>
                 @endforeach
@@ -111,7 +103,6 @@
                     @endif
                     @endforeach
                     <!-- Text -->
-                    <p class="card-text">{{$book->description}}</p>
                     <!-- Avilability -->
                     <p class="aval"> <span> {{$book->numberOfCopies}} </span> Books Available </p>
                     <!-- Button -->
