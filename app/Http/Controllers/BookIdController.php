@@ -8,6 +8,7 @@ use App\Category;
 use App\BookRating;
 use App\Comment;
 use App\CommentRating;
+use App\Favourite;
 
 class BookIdController extends Controller
 {
@@ -22,7 +23,8 @@ class BookIdController extends Controller
         $rates = BookRating::all();
         $comments = Comment::all();
         $commRate = CommentRating::all();
-        return view('bookid', ['books' => $Book,'Cates' => $Categories, 'rates' => $rates,'related' => $related, 'comment' => $comments, 'comRate' => $commRate]);
+        $favourite = Favourite::all();
+        return view('bookid', ['books' => $Book,'Cates' => $Categories, 'rates' => $rates,'related' => $related, 'comment' => $comments, 'comRate' => $commRate, 'fav' => $favourite]);
     }
 
 }
