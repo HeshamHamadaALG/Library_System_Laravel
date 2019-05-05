@@ -8,6 +8,7 @@ use Auth;
 use Hash;
 use DB;
 
+
 class AdminController extends Controller
 {
     /**
