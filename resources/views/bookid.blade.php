@@ -55,6 +55,8 @@
                                 <div class="d-block col-md-3">
                                     <!-- Avilability -->
                                     <p class="aval"> <span> {{$book->numberOfCopies}} </span> Books Available </p>
+                                     <!-- Fees Per Day -->
+                                     <p class="aval"> Fees Per Day : <span>  {{$book->feesPerDay}}  </span>  $ </p>
                                     <!-- Button -->
                                     <a class="btnLease col-md-12">Lease</a>
                                     </div>
