@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use App\Book;
 use App\Category;
 use App\BookRating;
-use App\Favourite;
+use App\Lease;
 use Illuminate\Support\Facades\Auth;
 
 
-class FavoriteController extends Controller
+class LeaseController extends Controller
 {
         /**
      * Store a newly created resource in storage.
@@ -20,14 +20,16 @@ class FavoriteController extends Controller
      */
     public function store(Request $request)
     {
-        $fav = new Favourite();
+        $lease = new Lease();
         $request->validate([
             'bkId',
-            'uId'
+            'uId',
+            'lease'
             ]);
-        $fav->book_id = $request->get('bkId');
-        $fav->user_id = $request->get('uId');
-        $fav->save();
+        $lease->book_id = $request->get('bkId');
+        $lease->user_id = $request->get('uId');
+        $lease->price = $request->get('lease');
+        $lease->save();
         return redirect()->back();
     }
 
@@ -37,9 +39,9 @@ class FavoriteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($book_id)
-    {
-        Favourite::where([['book_id',$book_id],['user_id',Auth::id()]])->delete();
-        return redirect()->back();
-    }
+    // public function destroy($book_id)
+    // {
+    //     Lease::where([['book_id',$book_id],['user_id',Auth::id()]])->delete();
+    //     return redirect()->back();
+    // }
 }
