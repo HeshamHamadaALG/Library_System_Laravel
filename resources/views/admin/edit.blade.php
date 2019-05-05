@@ -11,6 +11,7 @@
             </ol>
         </section>
         <section class="content">
+        
             <div class="row">
                 <form method="post" action="{{ route('admins.update' , ['id'=>$manager->id]) }}">
                     @method('put')
