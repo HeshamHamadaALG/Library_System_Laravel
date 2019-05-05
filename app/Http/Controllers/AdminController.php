@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Auth;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -14,11 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $managers = User::where('type', 'admin');
-        //  auth()->user()->manager; 
-        return view('admin.index' , compact('managers')); 
-        // return view('admin.index');
-
+        $managers = User::all();
+        return view('admin.list' , compact('managers')); 
     }
 
     /**
@@ -28,7 +27,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('addManager');
+        return view('admin.index'); 
     }
 
     /**
@@ -40,19 +39,21 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|unique:managers|max:255',
+            'name' => 'required|unique:users|max:255',
             'phone' => 'required',
             'email' => 'required',
+            'password' => 'required',
             'nationalID' => 'required',
         ]);
         $managers= new User();
         $managers->name = $request->name;
         $managers->phone = $request->phone;
         $managers->email = $request->email;
+        $managers->password = Hash::make($request['password']);
         $managers->nationalID = $request->nationalID;
-        $managers->user_id = Auth::id();
+        $managers->type = $request->type;
         $managers->save();
-        return redirect('/list');
+        return redirect('/admins');
     }
 
     /**
@@ -64,7 +65,7 @@ class AdminController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        return view('admin.listManagers', compact('user'));
     }
 
     /**
@@ -75,12 +76,8 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('users.edit', compact('user'));
-
-        $this->authorize('update', $id);
- 
-        return view('edit', ['manager'=> $id]);
+        $manager = User::find($id);
+        return view('admin.edit', compact('manager'));
     }
 
     /**
@@ -92,21 +89,15 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'=>'required',
-            'phone'=> 'required|numeric|unique:users,phone,'.$id,
-            
-            ]);
-            
-            
-            $user = User::find($id);
-            // Rule::unique('phone')->ignore($contact);
-            $user->name  = $request->get('name');
-            $user->phone = $request->get('phone');
-            $user->email = $request->get('email');
-            $user->NationalID = $request->get('NationalID');
-            $user->save();
-            return redirect('/');
+        $user = User::find($id);
+        $user->update([
+            'name' => $request->name ,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'nationalID' => $request->NationalID,
+            'type' => $request->type
+        ]);
+        return redirect('/admins');
     }
 
     /**
@@ -118,7 +109,7 @@ class AdminController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect('/home'); 
+        return redirect('/admins');
     }
 
     public function chart(){

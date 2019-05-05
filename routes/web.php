@@ -1,6 +1,7 @@
 <?php
 
 use App\Book;
+use App\User;
 use Illuminate\Support\Facades\Input;
 
 /*
@@ -28,32 +29,26 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
     Route::get('/admin/chart', 'AdminController@chart')->name('admin.chart');
     Route::resource('admin', 'AdminController');
-    // Route::get('/admin', 'AdminController');
     Route::get('/api/get-lease-chart-data', 'ChartDataController@getMonthlyLeaseData');
 
 // Not Finished yet
     Route::get('books', function () {
         return View::make('books');
     });
-
     Route::get('books/{category}', 'BookController@category')->name('category');
     Route::get('bookid/{bookid}', 'BookIdController@bookid')->name('bookid');
     Route::get('/fav/{id}', 'FavoriteController@store')->name('store');
     Route::get('/del/{id}', 'FavoriteController@destroy')->name('deletefav');
-
-
-
 });
 
 Route::resource('books', 'BookController');
-
-
-Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
-    Route::get('/admin/manager' , 'Admin\ManagerController@index')->name('manager');
-    Route::post('/admin/manager/save' , 'Admin\ManagerController@save')->name('saveManager');
-    Route::post('/admin/manager/update/{id}' , 'Admin\ManagerController@update')->name('updateManager');
-    Route::post('/admin/manager/delete/{id}' , 'Admin\ManagerController@destroy')->name('deleteManager');
-});
+Route::resource('admins' , 'AdminController');
+// Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
+//     Route::get('/admin/manager' , 'AdminController@index')->name('manager');
+//     Route::post('/admin/manager/save' , 'AdminController@save')->name('saveManager');
+//     Route::post('/admin/manager/update/{id}' , 'AdminController@update')->name('updateManager');
+//     Route::post('/admin/manager/delete/{id}' , 'AdminController@destroy')->name('deleteManager');
+// });
 
 //search
 Route::any('/search',function(){

@@ -14,8 +14,7 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $managers = auth()->user()->manager; 
-        return view('list' , compact('managers')); 
+        return view('index' , compact('managers')); 
     }
 
     /**
@@ -25,7 +24,7 @@ class ManagerController extends Controller
      */
     public function create()
     {
-        return view('addManager');
+        return view('index');
     }
 
     /**
@@ -49,7 +48,7 @@ class ManagerController extends Controller
         $managers->nationalID = $request->nationalID;
         $managers->user_id = Auth::id();
         $managers->save();
-        return redirect('/list');
+        return redirect('index');
     }
 
     /**
@@ -61,7 +60,7 @@ class ManagerController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        return view('index', compact('user'));
     }
 
     /**
@@ -77,7 +76,7 @@ class ManagerController extends Controller
 
         $this->authorize('update', $id);
  
-        return view('edit', ['manager'=> $id]);
+        return view('index', ['manager'=> $id]);
     }
 
     /**
@@ -115,6 +114,6 @@ class ManagerController extends Controller
     public function destroy($id)
     {
         User::destroy($id);
-        return redirect('/home'); 
+        return redirect('/index'); 
     }
 }
