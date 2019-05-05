@@ -6,5 +6,8 @@
   .star-rating .fa-star{color: yellow;}
   .book-rating .fa-star{color: yellow;}
 
-
-  
+  .book-rating-card{
+    color: yellow;
+    line-height:50px;
+    font-size:30!important;
+  }

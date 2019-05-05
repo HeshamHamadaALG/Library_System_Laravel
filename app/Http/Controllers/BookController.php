@@ -127,7 +127,7 @@ class BookController extends Controller
     public function rateBook(Request $request){
         $request->validate([
           'bookId'=>'required',
-          'currRating'=>'required',
+          'currRating'=>'required|numeric|max:5',
         ]);
       $newBookRating = BookRating::updateOrCreate([
           'book_id' => $request->get('bookId'),
