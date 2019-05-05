@@ -114,7 +114,14 @@
                     <!-- Avilability -->
                     <p class="aval"> <span> {{$book->numberOfCopies}} </span> Books Available </p>
                     <!-- Button -->
-                    <a class="btnLease disable">Lease</a>
+
+                    {{-- @if($book->leases->where('user_id',Auth::user()->id))
+                        <a href="{{ route('cancelLease', $book->id) }}" class="btnLease">Lease</a>
+                        {{-- <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id, 'lease' => 1]) }}" class="btnLease">Lease</a> --}}
+                    {{-- @else
+                        <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id, 'lease' => 1]) }}" class="btnLease">Lease</a>
+                    @endif --}}
+
                 </div>
             </div>
             <!-- Card Narrower -->
