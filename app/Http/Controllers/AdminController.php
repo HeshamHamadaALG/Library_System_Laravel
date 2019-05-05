@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Hash;
+use DB;
+
 
 class AdminController extends Controller
 {
