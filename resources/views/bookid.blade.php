@@ -69,7 +69,8 @@
                                             </div>
                                         </ul>
                                     </div>
-                                    <!-- End Lease Button -->
+
+                                    <!-- End .. Lease Button -->
                                 </div>
                             </div>
 
