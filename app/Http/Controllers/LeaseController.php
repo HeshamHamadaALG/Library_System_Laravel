@@ -8,6 +8,7 @@ use App\Category;
 use App\BookRating;
 use App\Lease;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 
 class LeaseController extends Controller
@@ -23,13 +24,14 @@ class LeaseController extends Controller
         $lease = new Lease();
         $request->validate([
             'bkId',
-            'uId',
-            'lease'
+            'price'
             ]);
+        $book = Book::find($request->get('bkId'));
         $lease->book_id = $request->get('bkId');
-        $lease->user_id = $request->get('uId');
-        $lease->price = $request->get('lease');
+        $lease->user_id = Auth::id();
+        $lease->price = $book->feesPerDay*$request->get('days');
         $lease->save();
+        // return ($request->get('bkId'));
         return redirect()->back();
     }
 

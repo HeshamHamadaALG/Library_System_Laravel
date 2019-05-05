@@ -17,7 +17,7 @@ class AdminController extends Controller
     public function index()
     {
         $managers = User::all();
-        return view('admin.list' , compact('managers')); 
+        return view('admin.list' , compact('managers'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.index'); 
+        return view('admin.index');
     }
 
     /**
@@ -113,6 +113,7 @@ class AdminController extends Controller
     }
 
     public function chart(){
-        return view('admin.chart'); 
+        return redirect('/admins');
+        // return view('admin.chart');
     }
 }

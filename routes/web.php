@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/fav/{id}', 'FavoriteController@store')->name('store');
     Route::get('/del/{id}', 'FavoriteController@destroy')->name('deletefav');
 
-    Route::get('/lease/{id}', 'LeaseController@store')->name('store');
+    Route::post('/lease', 'LeaseController@store')->name('lease');
     Route::get('/leasedel/{id}', 'LeaseController@destroy')->name('cancelLease');
 });
 
