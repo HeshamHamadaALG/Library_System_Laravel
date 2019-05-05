@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Auth;
 use Hash;
+use DB;
 
 class AdminController extends Controller
 {
@@ -28,12 +29,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
         $this->authorize('create',Auth::user());
         return view('admin.index'); 
-=======
-        return view('admin.index');
->>>>>>> d4ba1ddf08ba55f45f031d4ad67cad70695b3d41
     }
 
     /**
