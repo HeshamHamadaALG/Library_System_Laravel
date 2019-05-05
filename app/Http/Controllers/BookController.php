@@ -73,8 +73,12 @@ class BookController extends Controller
         $related = Book::all();
         $Categories = Category::all();
         $rates = BookRating::all();
+        $related = Book::all();
         $comments = Comment::all();
+        // $hoba = $comments[0]->commentRatings->where('user_id',Auth::id())->first()->rate;
+        // $hoba = $comments[0]->commentRatings->avg('rate');
         $commRate = CommentRating::all();
+        // return view('bookid', ['hoba'=>$hoba,'books' => $Book,'Cates' => $Categories, 'rates' => $rates,'related' => $related, 'comments' => $comments, 'comRate' => $commRate]);
         $favourite = Favourite::all()->where([
             'book_id' => $bookId,
             'user_id' => Auth::user()->id,
@@ -94,14 +98,45 @@ class BookController extends Controller
         $request->validate([
             'text' => 'required',
         ]);
-
         $comment = new Comment([
             'text' => $request->get('text'),
             'user_id' => Auth::id(),
             'book_id' => $request->get('bookID'),
         ]);
-
         $comment->save();
         return redirect('/books/' . $request->get('bookID'));
     }
+
+    public function rateComment(Request $request)
+    {
+        $request->validate([
+            'bookId'=>'required',
+            'comment_id'=>'required',
+            'currRating'=>'required|numeric|max:5',
+          ]);
+        $newCommentRating = CommentRating::updateOrCreate([
+            'book_id' => $request->get('bookId'),
+            'comment_id' => $request->get('comment_id'),
+            'user_id'=> Auth::id()
+            ],['rate'=> $request->get('currRating')]);
+        //   'rate'=> 
+          $newCommentRating->save();
+        return ('done');
+    } 
+    
+    public function rateBook(Request $request){
+        $request->validate([
+          'bookId'=>'required',
+          'currRating'=>'required',
+        ]);
+      $newBookRating = BookRating::updateOrCreate([
+          'book_id' => $request->get('bookId'),
+          'user_id' => Auth::id()
+          ],
+          ['rate' => $request->get('currRating')]);
+      //   'rate'=> 
+        // $newBookRating->save();
+      return (Auth::id());
+    }
+
 }

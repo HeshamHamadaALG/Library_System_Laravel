@@ -1,6 +1,10 @@
-.star-rating {
+.star-rating  .book-rating{
     line-height:32px;
     font-size:1.25em;
   }
   
   .star-rating .fa-star{color: yellow;}
+  .book-rating .fa-star{color: yellow;}
+
+
+  
