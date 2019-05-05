@@ -58,8 +58,12 @@
                                      <!-- Fees Per Day -->
                                      <p class="aval"> Fees Per Day : <span>  {{$book->feesPerDay}}  </span>  $ </p>
                                     <!-- Button -->
-                                    <a class="btnLease col-md-12">Lease</a>
-                                    </div>
+                                    @if($book->leases->where('user_id',Auth::user()->id))
+                                        <a href="{{ route('cancelLease', $book->id) }}" class="btnLease">Lease</a>
+                                        {{-- <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id, 'lease' => ($book->feesPerDay)*5]) }}" class="btnLease">Lease</a> --}}
+                                    @else
+                                        <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id, 'lease' => ($book->feesPerDay)*5]) }}" class="btnLease">Lease</a>
+                                    @endif
                             </div>
 
 

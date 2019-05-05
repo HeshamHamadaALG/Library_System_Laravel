@@ -39,9 +39,9 @@ class LeaseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($book_id)
-    // {
-    //     Lease::where([['book_id',$book_id],['user_id',Auth::id()]])->delete();
-    //     return redirect()->back();
-    // }
+    public function destroy($book_id)
+    {
+        Lease::where([['book_id',$book_id],['user_id',Auth::id()]])->delete();
+        return redirect()->back();
+    }
 }
