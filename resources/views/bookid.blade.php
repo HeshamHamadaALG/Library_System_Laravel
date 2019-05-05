@@ -12,48 +12,58 @@
 
         <div class="main col-md-10">
             @foreach ($books as $book)
-            <div class="bookCard d-inline-flex"><img class="image cover" src="{{$book->image}}" />
-                <div class="book-info">
-                    <!-- start favorite -->
-                    @if($book->favourites->where('user_id',Auth::user()->id)->count() > 0)
-                    <a href="{{ route('deletefav', $book->id) }}">
-                    <span style="float: right; font-size: 180%;"><i class="fa fa-heart fav collr"></i></span>
-                    </a>
-                    @else
-                    <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
-                    <span style="float: right; font-size: 180%;"><i class="fa fa-heart fav"></i></span>
-                    </a>
-                    @endif
+            <div class="bookCard col-md-12">
+                <div class="d-inline">
+                    <img class="image cover marg" src="{{$book->image}}" />
+                    <div class="book-info">
+                        <!-- start favorite -->
+                        @if($book->favourites->where('user_id',Auth::user()->id)->count() > 0)
+                        <a href="{{ route('deletefav', $book->id) }}">
+                            <span style="float: right; font-size: 180%;"><i class="fa fa-heart fav collr"></i></span>
+                        </a>
+                        @else
+                        <a href="{{ route('store', [0,'bkId' => $book->id, 'uId' => Auth::user()->id]) }}">
+                            <span style="float: right; font-size: 180%;"><i class="fa fa-heart fav"></i></span>
+                        </a>
+                        @endif
 
-                    <!-- end favorite -->
-                    <h3 class="font-weight-bold">{{$book->title}}</h3>
-                    <!-- Author -->
-                    <p class="card-text">By : {{$book->author}}</p>
-                    <!-- Data -->
-                    <ul class="list-unstyled list-inline rating mb-0">
-                        <li class="list-inline-item"><i class="fa fa-star rateStr"> </i></li>
-                        <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
-                        <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
-                        <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
-                        <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
-                        <li class="list-inline-item">
-                            @foreach ($rates as $rate)
-                            @if ($rate->book_id == $book->id)
-                            <p class="text-muted">{{$rate->rate}}</p>
-                            @endif
-                            @endforeach
-                        </li>
-                    </ul>
-                    <!-- Card content -->
-                    <div class="card-body card-body-cascade">
-                        <!-- Text -->
-                        <p class="card-text">{{$book->description}}</p>
-                        <!-- Avilability -->
-                        <p class="aval"> <span> {{$book->numberOfCopies}} </span> Books Available </p>
-                        <!-- Button -->
-                        <a class="btnLease col-md-3">Lease</a>
+                        <!-- end favorite -->
+                        <h3 class="font-weight-bold">{{$book->title}}</h3>
+                        <!-- Author -->
+                        <p class="card-text">By : {{$book->author}}</p>
+                        <!-- Data -->
+                        <ul class="list-unstyled list-inline rating mb-0">
+                            <li class="list-inline-item"><i class="fa fa-star rateStr"> </i></li>
+                            <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
+                            <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
+                            <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
+                            <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
+                            <li class="list-inline-item">
+                                @foreach ($rates as $rate)
+                                @if ($rate->book_id == $book->id)
+                                <p class="text-muted">{{$rate->rate}}</p>
+                                @endif
+                                @endforeach
+                            </li>
+                        </ul>
+                        <!-- Card content -->
+                        <div class="card-body card-body-cascade">
+                            <!-- Text -->
+                            <p class="card-text">{{$book->description}}</p>
+
+                            <div class="row justify-content-md-center">
+                                <div class="d-block col-md-3">
+                                    <!-- Avilability -->
+                                    <p class="aval"> <span> {{$book->numberOfCopies}} </span> Books Available </p>
+                                     <!-- Fees Per Day -->
+                                     <p class="aval"> Fees Per Day : <span>  {{$book->feesPerDay}}  </span>  $ </p>
+                                    <!-- Button -->
+                                    <a class="btnLease col-md-12">Lease</a>
+                                    </div>
+                            </div>
 
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,10 +73,10 @@
             <!-- add comment -->
 
             <form method="post" action="{{route('addComment',$book->id)}}">
-                    @csrf
+                @csrf
                 <div class="form-group shadow-textarea d-flex">
                     <textarea class="form-control z-depth-1 col-md-9" rows="2" name="text" placeholder="Write comment here..."></textarea>
-                    <input type="hidden" value="{{$book->id}}" name="bookID"/>
+                    <input type="hidden" value="{{$book->id}}" name="bookID" />
                     <button type="submit" class="btn btn-info col-md-3 "> Add Comment ..</button>
                 </div>
             </form>
@@ -77,7 +87,7 @@
 
             <!-- show comments -->
             <div class="row">
-            @foreach ($comments as $comment)
+                @foreach ($comments as $comment)
                 <div class="col-sm-12" style="margin: 2%;">
                     <div class="row">
                         <div class="card card-cascade col-sm-9">
@@ -85,7 +95,7 @@
                                 <strong>{{$comment->user->name}}</strong> <span class="text-muted">{{$comment->created_at}}</span>
                             </div>
                             <div class="card-body card-body-cascade">
-                            {{$comment->text}}
+                                {{$comment->text}}
                             </div>
                         </div>
                         <div class="star-rating star{{$loop->index}} col-sm-3" id="1">
@@ -98,7 +108,7 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+                @endforeach
             </div>
             <!-- End  show comments -->
 
@@ -141,7 +151,7 @@
                                     <!-- Card image -->
                                     <div class="view view-cascade overlay">
                                         <a href="{{ route('books.show', $relate->id) }}">
-                                        <img class="imgg card-img-top" src="{{$relate->image}}" alt="Card image cap">
+                                            <img class="imgg card-img-top" src="{{$relate->image}}" alt="Card image cap">
                                         </a>
                                         <a>
                                             <div class="mask rgba-white-slight"></div>
@@ -155,7 +165,7 @@
 
                         </div>
                     </div>
-                        @endif
+                    @endif
                     @endforeach
 
                 </div>

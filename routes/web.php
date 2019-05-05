@@ -1,6 +1,7 @@
 <?php
 
 use App\Book;
+use App\User;
 use Illuminate\Support\Facades\Input;
 
 /*
@@ -27,8 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('users', 'UserController');
     Route::get('/admin/chart', 'AdminController@chart')->name('admin.chart');
-    Route::resource('admin', 'AdminController');
-    // Route::get('/admin', 'AdminController');
+
+
+    Route::resource('admins', 'AdminController');
     Route::get('/api/get-lease-chart-data', 'ChartDataController@getMonthlyLeaseData');
 
 // Not Finished yet
@@ -56,3 +58,9 @@ Route::any('/search',function(){
     else
         return view ('search')->withMessage('No Details found. Try to search again !');
 });
+// Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
+//     Route::get('/admin/manager' , 'Admin\ManagerController@index')->name('manager');
+//     Route::post('/admin/manager/save' , 'Admin\ManagerController@save')->name('saveManager');
+//     Route::post('/admin/manager/update/{id}' , 'Admin\ManagerController@update')->name('updateManager');
+//     Route::post('/admin/manager/delete/{id}' , 'Admin\ManagerController@destroy')->name('deleteManager');
+// });
