@@ -18,7 +18,7 @@ class AdminController extends Controller
     {   
         $this->authorize('view',Auth::user(),User::class);
         $managers = User::all();
-        return view('admin.list' , compact('managers')); 
+        return view('admin.list' , compact('managers'));
     }
 
     /**
@@ -28,8 +28,12 @@ class AdminController extends Controller
      */
     public function create()
     {
+<<<<<<< HEAD
         $this->authorize('create',Auth::user());
         return view('admin.index'); 
+=======
+        return view('admin.index');
+>>>>>>> d4ba1ddf08ba55f45f031d4ad67cad70695b3d41
     }
 
     /**
@@ -118,6 +122,7 @@ class AdminController extends Controller
     }
 
     public function chart(){
-        return view('admin.chart'); 
+        return redirect('/admins');
+        // return view('admin.chart');
     }
 }

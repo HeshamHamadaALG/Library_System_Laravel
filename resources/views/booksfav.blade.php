@@ -115,9 +115,9 @@
         @endforeach
     </div>
 
-    <!-- start pagination -->
+{{-- <!-- start pagination -->
     <hr>
     {{ $books->links() }}
-    <!-- End Pagination -->
+    <!-- End Pagination --> --}}
 </div>
 @endsection

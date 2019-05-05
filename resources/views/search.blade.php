@@ -18,7 +18,7 @@
                 @foreach($details as $books)
                 <tr>
                     <td>
-                        <a href="{{ route('bookid', $books->id) }}">
+                        <a href="{{ route('books.show', $books->id) }}">
                             <img src="{{$books->image}}" width="100" height="100"/>
                         </a>
                     </td>

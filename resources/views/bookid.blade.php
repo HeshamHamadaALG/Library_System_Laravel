@@ -3,6 +3,7 @@
 <link href="{{ asset('css/stars.css') }}" rel="stylesheet">
 
 @section('content')
+
 <div class="container">
     <div class="row">
 
@@ -55,11 +56,34 @@
                                 <div class="d-block col-md-3">
                                     <!-- Avilability -->
                                     <p class="aval"> <span> {{$book->numberOfCopies}} </span> Books Available </p>
-                                     <!-- Fees Per Day -->
-                                     <p class="aval"> Fees Per Day : <span>  {{$book->feesPerDay}}  </span>  $ </p>
-                                    <!-- Button -->
-                                    <a class="btnLease col-md-12">Lease</a>
+                                    <!-- Fees Per Day -->
+                                    <p class="aval"> Fees Per Day : <span> {{$book->feesPerDay}} </span> $ </p>
+                                    <!-- Lease Button -->
+                                    <div class="dropdown">
+                                        @if($book->leases->where('user_id',Auth::user()->id)->count() > 0)
+                                            <div class="finLease">
+                                                <button disabled class="lease">Lease</button>
+                                            </div>
+                                        @else
+                                        <a class="btnLease col-md-12 dropdown-toggle" data-toggle="dropdown">Lease</a>
+                                        <form action="{{route('lease')}}" method="post">
+                                            {{ csrf_field() }}
+                                        <ul class="dropdown-menu col-md-12">
+                                            <p class="aval"> Choose Number of Days : </p>
+                                            <input id="days" class="form-control" type="number" min="1" max="31" name="days">
+                                            <!-- action lease button -->
+                                            <div class="finLease">
+                                                       <input type="submit" value="lease"  class="btnLease" />
+                                                        <input type="hidden" value="{{$book->id}}" name="bkId" />
+
+                                                </div>
+                                                @endif
+
+                                            </ul>
+                                        </form>
                                     </div>
+                                    <!-- End Lease Button -->
+                                </div>
                             </div>
 
 
