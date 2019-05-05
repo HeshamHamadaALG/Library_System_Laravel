@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('admin', 'AdminController');
     // Route::get('/admin', 'AdminController');
     Route::get('/api/get-lease-chart-data', 'ChartDataController@getMonthlyLeaseData');
+    Route::post('/api/set_comment_rating', 'BookController@rateComment');
+    
 
 // Not Finished yet
 
@@ -50,9 +52,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('bookid/{bookid}', 'BookIdController@bookid')->name('bookid');
     Route::get('/fav/{id}', 'FavoriteController@store')->name('store');
     Route::get('/del/{id}', 'FavoriteController@destroy')->name('deletefav');
+    Route::resource('books', 'BookController');
 });
 
-Route::resource('books', 'BookController');
 
 
 Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){

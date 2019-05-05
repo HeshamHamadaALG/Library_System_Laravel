@@ -38,11 +38,15 @@ class BookController extends Controller
     {
 
         $Book = Book::all()->where('id', $bookId);
+        
         $Categories = Category::all()->where('id', $bookId);
         $rates = BookRating::all();
+        $related = Book::all();
         $comments = Comment::all();
+        $hoba = $comments[0]->commentRatings->where('user_id',Auth::id())->first()->rate;
+        $hoba = $comments[0]->commentRatings->avg('rate');
         $commRate = CommentRating::all();
-        return view('bookid', ['books' => $Book,'Cates' => $Categories, 'rates' => $rates, 'comments' => $comments, 'comRate' => $commRate]);
+        return view('bookid', ['hoba'=>$hoba,'books' => $Book,'Cates' => $Categories, 'rates' => $rates,'related' => $related, 'comments' => $comments, 'comRate' => $commRate]);
     }
 
 
@@ -69,7 +73,22 @@ class BookController extends Controller
     }
 
 
-    
+    public function rateComment(Request $request)
+    {
+        $request->validate([
+            'bookId'=>'required',
+            'comment_id'=>'required',
+            'currRating'=>'required',
+          ]);
+        $newCommentRating = CommentRating::updateOrCreate([
+            'book_id' => $request->get('bookId'),
+            'comment_id' => $request->get('comment_id'),
+            'user_id'=> Auth::id()
+            ],['rate'=> $request->get('currRating')]);
+        //   'rate'=> 
+          $newCommentRating->save();
+        return ('done');
+    } 
     
 
 }

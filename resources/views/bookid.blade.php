@@ -15,9 +15,10 @@
             <div class="bookCard d-inline-flex"><img class="image cover" src="{{$book->image}}" />
                 <div class="book-info">
                     <span style="float: right; font-size: 180%"><i class="fa fa-heart fav"></i></span>
-                    <h3 class="font-weight-bold">{{$book->title}}</h3>
+                    <h3 class="font-weight-bold">{{$book->title}}asdf {{$hoba}}</h3>
                     <!-- Author -->
                     <p class="card-text">By : {{$book->author}}</p>
+                    <input type="hidden" id="bookId" value="{{$book->id}}" />
                     <!-- Data -->
                     <ul class="list-unstyled list-inline rating mb-0">
                         <li class="list-inline-item"><i class="fa fa-star rateStr"> </i></li>
@@ -72,6 +73,8 @@
                         <div class="card card-cascade col-sm-9">
                             <div class="card-header">
                                 <strong>{{$comment->user->name}}</strong> <span class="text-muted">{{$comment->created_at}}</span>
+                                <span>{{($comments[$loop->index]->commentRatings->avg('rate'))?
+                                    $comments[$loop->index]->commentRatings->avg('rate').'/5':'not rated'}}</span>
                             </div>
                             <div class="card-body card-body-cascade">
                             {{$comment->text}}
@@ -83,18 +86,17 @@
                             <span class="fa fa-star-o" data-rating="3"></span>
                             <span class="fa fa-star-o" data-rating="4"></span>
                             <span class="fa fa-star-o" data-rating="5"></span>
-                            <input type="hidden" name="whatever1" class="rating-value" value="4">
+                            <input type="hidden" class="rating-value" value="{{($comments[$loop->index]->commentRatings->where('user_id',Auth::id())->count() > 0)?
+                                                                                $comments[$loop->index]->commentRatings->where('user_id',Auth::id())->first()->rate:0}}">
+                            <input type="hidden" class="comment_id" value="{{$comment->id}}">
                         </div>
                     </div>
                 </div>
             @endforeach
             </div>
             <!-- End  show comments -->
-
             <hr>
-
             <h2> Related Books</h2>
-
             <div id="ThumbnailCarousel" class="carousel slide col-xs-12" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -139,14 +141,10 @@
 
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
                         @endif
                     @endforeach
-
                 </div>
                 <a class="carousel-control-prev" href="#ThumbnailCarousel" role="button" data-slide="prev">
                     <button class="btn btn-dark">prev</button>
@@ -156,10 +154,6 @@
 
                 </a>
             </div>
-
-
-
-
         </div>
         @endforeach
     </div>
