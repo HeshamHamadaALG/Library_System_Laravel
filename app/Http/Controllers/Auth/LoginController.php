@@ -31,8 +31,8 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
         {
-        if ( $user->type=="admin" ) {// do your margic here
-            return redirect()->route('admin.index');
+        if ( $user->type=="manager" ) {// do your margic here
+            return redirect()->route('admins.index');
         }
 
         return redirect('/');

@@ -15,7 +15,8 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $this->authorize('view',Auth::user(),User::class);
         $managers = User::all();
         return view('admin.list' , compact('managers')); 
     }
@@ -27,6 +28,7 @@ class AdminController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',Auth::user());
         return view('admin.index'); 
     }
 
@@ -89,6 +91,8 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update',Auth::user(),User::class);
+
         $user = User::find($id);
         $user->update([
             'name' => $request->name ,
@@ -108,6 +112,7 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Auth::user(),User::class);
         User::destroy($id);
         return redirect('/admins');
     }
