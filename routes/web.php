@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('users', 'UserController');
     Route::get('/admin/chart', 'AdminController@chart')->name('admin.chart');
-    Route::resource('admin', 'AdminController');
+    Route::resource('admins', 'AdminController');
     Route::get('/api/get-lease-chart-data', 'ChartDataController@getMonthlyLeaseData');
 
 // Not Finished yet
