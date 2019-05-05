@@ -112,7 +112,7 @@ class BookController extends Controller
         $request->validate([
             'bookId'=>'required',
             'comment_id'=>'required',
-            'currRating'=>'required',
+            'currRating'=>'required|numeric|max:5',
           ]);
         $newCommentRating = CommentRating::updateOrCreate([
             'book_id' => $request->get('bookId'),
