@@ -7,6 +7,8 @@ use App\Book;
 use App\Category;
 use App\BookRating;
 use App\Favourite;
+use Illuminate\Support\Facades\Auth;
+
 
 class FavoriteController extends Controller
 {
@@ -26,7 +28,7 @@ class FavoriteController extends Controller
         $fav->book_id = $request->get('bkId');
         $fav->user_id = $request->get('uId');
         $fav->save();
-        return redirect('/books');
+        return redirect()->back();
     }
 
         /**
@@ -35,10 +37,10 @@ class FavoriteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($book_id)
     {
-        Favourite::destroy($id);
-        return redirect('/books'); 
+        Favourite::where([['book_id',$book_id],['user_id',Auth::id()]])->delete();
+        return redirect()->back(); 
     }
 }
 

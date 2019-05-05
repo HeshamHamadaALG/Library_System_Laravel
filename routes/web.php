@@ -31,7 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('/admin', 'AdminController');
     Route::get('/api/get-lease-chart-data', 'ChartDataController@getMonthlyLeaseData');
     Route::post('/api/set_comment_rating', 'BookController@rateComment');
-    
+    Route::post('/api/set_book_rating', 'BookController@rateBook');
+
 
 // Not Finished yet
 
@@ -49,7 +50,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Route::get('books/{category}', 'BookController@category')->name('category');
 
-    Route::get('bookid/{bookid}', 'BookIdController@bookid')->name('bookid');
+    // Route::get('bookid/{bookid}', 'BookController@show')->name('bookid');
+    // Route::get('bookid/{bookid}', 'BookIdController@bookid')->name('bookid');
+    // Route::resource('books', 'BookController');
+    
+    Route::get('/myfav', 'BookController@favourite')->name('favourite');
+    Route::get('/myfav/cat/{category}', 'BookController@favcategory')->name('favcategory');
+    Route::get('/latest', 'BookController@latest')->name('latest');
     Route::get('/fav/{id}', 'FavoriteController@store')->name('store');
     Route::get('/del/{id}', 'FavoriteController@destroy')->name('deletefav');
     Route::resource('books', 'BookController');
@@ -57,12 +64,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
-    Route::get('/admin/manager' , 'Admin\ManagerController@index')->name('manager');
-    Route::post('/admin/manager/save' , 'Admin\ManagerController@save')->name('saveManager');
-    Route::post('/admin/manager/update/{id}' , 'Admin\ManagerController@update')->name('updateManager');
-    Route::post('/admin/manager/delete/{id}' , 'Admin\ManagerController@destroy')->name('deleteManager');
-});
+// Route::group(['prefix' => 'AdminPanel', 'middleware' => 'auth'], function (){
+//     Route::get('/admin/manager' , 'Admin\ManagerController@index')->name('manager');
+//     Route::post('/admin/manager/save' , 'Admin\ManagerController@save')->name('saveManager');
+//     Route::post('/admin/manager/update/{id}' , 'Admin\ManagerController@update')->name('updateManager');
+//     Route::post('/admin/manager/delete/{id}' , 'Admin\ManagerController@destroy')->name('deleteManager');
+// });
 
 //search
 Route::any('/search',function(){
