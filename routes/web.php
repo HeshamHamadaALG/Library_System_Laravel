@@ -1,6 +1,7 @@
 <?php
 
 use App\Book;
+use App\User;
 use Illuminate\Support\Facades\Input;
 
 /*
@@ -28,7 +29,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', 'UserController');
     Route::get('/admin/chart', 'AdminController@chart')->name('admin.chart');
     Route::resource('admin', 'AdminController');
-    // Route::get('/admin', 'AdminController');
     Route::get('/api/get-lease-chart-data', 'ChartDataController@getMonthlyLeaseData');
 
 // Not Finished yet
