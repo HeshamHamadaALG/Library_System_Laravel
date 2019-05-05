@@ -63,7 +63,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'https://remotemysql.com/phpmyadmin/index.php'),
+            'host' => env('DB_HOST', 'https://remotemysql.com/phpmyadmin'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'VB4VZB0Yn8'),
             'username' => env('DB_USERNAME', 'VB4VZB0Yn8'),
