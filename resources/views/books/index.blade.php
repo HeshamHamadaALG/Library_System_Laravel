@@ -36,7 +36,7 @@
             <td>{{$book->description}}</td>
             <td>{{$book->author}}</td>
             <td>{{$book->category->name}}</td>
-            <td><img src="{{ asset('img' . $book->image) }}" /></td>
+            <td><img src="{{ asset($book->image) }}" height="80" width="100"/></td>
             <td>{{$book->feesPerDay}}</td>
             <td>{{$book->numberOfCopies}}</td>
             <td><a href="{{ route('adminbooks.edit',$book->id)}}" class="btn btn-primary">Edit</a></td>

@@ -15,7 +15,7 @@
             @foreach ($books as $book)
             <div class="bookCard col-md-12">
                 <div class="d-inline">
-                    <img class="image cover marg" src="{{$book->image}}" />
+                    <img class="image cover marg" src="{{ asset($book->image) }}" />
                     <div class="book-info">
                         <!-- start favorite -->
                         @if($book->favourites->where('user_id',Auth::user()->id)->count() > 0)
@@ -155,7 +155,8 @@
                                     </div>
                                     <!-- Card image -->
                                     <div class="view view-cascade overlay">
-                                        <img class="imgg card-img-top" src="{{$book->image}}" alt="Card image cap">
+                                    
+                                        <img class="imgg card-img-top" src="{{ asset($book->image) }}" alt="Card image cap">
                                         <a>
                                             <div class="mask rgba-white-slight"></div>
                                         </a>

@@ -56,12 +56,12 @@ class AdminBookController extends Controller
         $books->description = $request->description;
         $books->author = $request->author;
         $books->cat_id = $request->cat_id;
-        $books->image = $request->image->move('books', str_random(6) . time() . $request->image->getClientOriginalName());
+        $books->image = $request->image->move('bookphotos', str_random(6) . time() . $request->image->getClientOriginalName());
         $books->feesPerDay = $request->feesPerDay;
         $books->numberOfCopies = $request->numberOfCopies;
         $books->save();
 
-        return redirect('/adminbooks')->with('success', 'Book is successfully saved');
+        return redirect('admins/adminbooks')->with('success', 'Book is successfully saved');
         // $book = Book::create($validatedData);
 
         // return redirect('/books')->with('success', 'Book is successfully saved');
