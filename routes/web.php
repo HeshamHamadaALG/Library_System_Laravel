@@ -18,9 +18,9 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('home');
     });
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', 'BookController@index')->name('home');
 
     Route::resource('users', 'UserController');
     Route::get('/admin/chart', 'AdminController@chart')->name('admin.chart');
