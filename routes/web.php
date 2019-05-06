@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return redirect()->route('books.index');
     });
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', 'BookController@index')->name('home');
 
     Route::resource('users', 'UserController');
     Route::get('/admin/chart', 'AdminController@chart')->name('admin.chart');
