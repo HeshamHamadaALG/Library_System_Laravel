@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link href="{{ asset('css/stars.css') }}" rel="stylesheet">
+
 @section('content')
 <div class="container">
 
@@ -90,6 +92,12 @@
                     <p class="card-text">By : {{$book->author}}</p>
                     <!-- Data -->
                     <ul class="list-unstyled list-inline rating mb-0">
+                        <li><span class="fa fa-star book-rating-card" data-rating="2"></span>
+                        <span> </span>
+                        <span>{{($book->bookRatings->avg('rate'))?
+                                    $book->bookRatings->avg('rate').'/5':'not rated'}}</span>
+                                </li>
+<!-- 
                         <li class="list-inline-item"><i class="fa fa-star rateStr"> </i></li>
                         <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
                         <li class="list-inline-item"><i class="fa fa-star rateStr"></i></li>
@@ -101,7 +109,7 @@
                             <p class="text-muted">{{$rate->rate}}</p>
                             @endif
                             @endforeach
-                        </li>
+                        </li> -->
                     </ul>
                     <!-- Category -->
                     @foreach ($Cates as $cate2)

@@ -18,12 +18,12 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
-        return view('welcome');
+        return redirect()->route('books.index');
     });
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', 'BookController@index')->name('home');
 
     Route::resource('users', 'UserController');
-    Route::get('/admin/chart', 'AdminController@chart')->name('admin.chart');
+    Route::get('/admins/chart', 'AdminController@chart')->name('admins.chart');
 
     Route::resource('admins/categories', 'CategoryController');
     Route::resource('admins/adminbooks', 'AdminBookController');

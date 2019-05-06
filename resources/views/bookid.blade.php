@@ -40,7 +40,10 @@
                         <span class="fa fa-star-o" data-rating="3"></span>
                         <span class="fa fa-star-o" data-rating="4"></span>
                         <span class="fa fa-star-o" data-rating="5"></span>
-                        <input type="hidden" name="whatever1" class="rating-value" value="{{$book->bookRatings->where('user_id',Auth::id())->first()->rate}}">
+                        <input type="hidden" name="whatever1" class="rating-value"
+                             value="{{($book->bookRatings->where('user_id',Auth::id())->count() > 0) ?
+                                $book->bookRatings->where('user_id',Auth::id())->first()->rate:0}}
+                             ">
                     </div>
                     <span>Overall: </span>
                     <span>{{($book->bookRatings->avg('rate'))?
