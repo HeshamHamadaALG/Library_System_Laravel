@@ -120,7 +120,7 @@ class AdminController extends Controller
     }
 
     public function chart(){
-        return redirect('/admins');
-        // return view('admin.chart');
+        // return redirect('/admins');
+        return view('admin.chart');
     }
 }

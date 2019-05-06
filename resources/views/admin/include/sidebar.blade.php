@@ -10,7 +10,7 @@
                     <span>List All Users</span></a>
             </li>
             <li class="{{ Route::current()->getName() == 'manager' ? 'active' : '' }}">
-                <a href="{{route('admin.chart')}}"><i class="fa fa-line-chart" aria-hidden="true"></i>
+                <a href="{{route('admins.chart')}}"><i class="fa fa-line-chart" aria-hidden="true"></i>
                 <!-- <i class="fas fa-chart-area"></i> -->
                     <span>Chart</span></a>
             </li>

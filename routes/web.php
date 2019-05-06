@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'BookController@index')->name('home');
 
     Route::resource('users', 'UserController');
-    Route::get('/admin/chart', 'AdminController@chart')->name('admin.chart');
+    Route::get('/admins/chart', 'AdminController@chart')->name('admins.chart');
 
     Route::resource('admins/categories', 'CategoryController');
     Route::resource('admins/adminbooks', 'AdminBookController');
