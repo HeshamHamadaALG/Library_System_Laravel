@@ -22,7 +22,7 @@
         </ul>
       </div><br />
     @endif
-    <form action="{{ route('books.store') }}" method="post" role="form" enctype="multipart/form-data">    
+    <form action="{{ route('adminbooks.store') }}" method="post" role="form" enctype="multipart/form-data">    
           @csrf
           <div class="form-group">
               <label for="title"> Name :</label>

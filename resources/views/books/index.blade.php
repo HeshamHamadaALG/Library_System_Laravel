@@ -39,9 +39,9 @@
             <td><img src="{{ asset('img' . $book->image) }}" /></td>
             <td>{{$book->feesPerDay}}</td>
             <td>{{$book->numberOfCopies}}</td>
-            <td><a href="{{ route('books.edit',$book->id)}}" class="btn btn-primary">Edit</a></td>
+            <td><a href="{{ route('adminbooks.edit',$book->id)}}" class="btn btn-primary">Edit</a></td>
             <td>
-                <form action="{{ route('books.destroy', $book->id)}}" method="post">
+                <form action="{{ route('adminbooks.destroy', $book->id)}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Delete</button>

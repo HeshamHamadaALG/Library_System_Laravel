@@ -22,7 +22,7 @@
         </ul>
       </div><br />
     @endif
-      <form method="post" action="{{ route('books.update', $book->id) }}">
+      <form method="post" action="{{ route('adminbooks.update', $book->id) }}">
           <div class="form-group">
               @csrf
               @method('PATCH')

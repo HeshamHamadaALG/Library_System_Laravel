@@ -15,19 +15,19 @@
                     <span>Chart</span></a>
             </li>
             <li class="{{ Route::current()->getName() == 'manager' ? 'active' : '' }}">
-                <a href="{{route('categories.create')}}"><i class="fa fa-users" aria-hidden="true"></i>
+                <a href="{{route('categories.create')}}"><i class="fa fa-list-alt" aria-hidden="true"></i>
                     <span>Add Categories</span></a>
             </li>
             <li class="{{ Route::current()->getName() == 'manager' ? 'active' : '' }}">
-                <a href="{{route('categories.index')}}"><i class="fa fa-users" aria-hidden="true"></i>
+                <a href="{{route('categories.index')}}"><i class="fa fa-list-alt" aria-hidden="true"></i>
                     <span>List All Categories</span></a>
             </li>
             <li class="{{ Route::current()->getName() == 'manager' ? 'active' : '' }}">
-                <a href="{{route('adminbooks.create')}}"><i class="fa fa-users" aria-hidden="true"></i>
+                <a href="{{route('adminbooks.create')}}"><i class="fa fa-book" aria-hidden="true"></i>
                     <span>Add Books</span></a>
             </li>
             <li class="{{ Route::current()->getName() == 'manager' ? 'active' : '' }}">
-                <a href="{{route('adminbooks.index')}}"><i class="fa fa-users" aria-hidden="true"></i>
+                <a href="{{route('adminbooks.index')}}"><i class="fa fa-book" aria-hidden="true"></i>
                     <span>List All Books</span></a>
             </li>
         </ul>

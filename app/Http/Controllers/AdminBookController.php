@@ -46,7 +46,7 @@ class AdminBookController extends Controller
             'title' => 'required|max:255',
             'description' => 'required|max:500',
             'author' => 'required|max:255',
-            'image' => '',
+            'image' => 'required|image|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
             'feesPerDay' => 'required|numeric',
             'numberOfCopies' => 'required|numeric',
             'cat_id' => 'required',
@@ -56,12 +56,12 @@ class AdminBookController extends Controller
         $books->description = $request->description;
         $books->author = $request->author;
         $books->cat_id = $request->cat_id;
-        $books->image = $request->image;
+        $books->image = $request->image->move('books', str_random(6) . time() . $request->image->getClientOriginalName());
         $books->feesPerDay = $request->feesPerDay;
         $books->numberOfCopies = $request->numberOfCopies;
         $books->save();
 
-        return redirect('/books');
+        return redirect('/adminbooks')->with('success', 'Book is successfully saved');
         // $book = Book::create($validatedData);
 
         // return redirect('/books')->with('success', 'Book is successfully saved');
@@ -106,13 +106,13 @@ class AdminBookController extends Controller
             'title' => 'required|max:255',
             'description' => 'required|max:500',
             'author' => 'required|max:255',
-            'image' => '',
+            'image' => 'required|image|mimes:jpeg,jpg,png,JPEG,JPG,PNG',
             'feesPerDay' => 'required|numeric',
             'numberOfCopies' => 'required|numeric',
         ]);
         Book::whereId($id)->update($validatedData);
 
-        return redirect('/books')->with('success', 'Book is successfully updated');
+        return redirect('/adminbooks')->with('success', 'Book is successfully updated');
     }
 
     /**
